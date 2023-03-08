@@ -17,8 +17,8 @@ function displayTable(arr) {
             <td>${new Intl.NumberFormat('vn-VN').format(emp.totalSalary)}</td>
             <td>${emp.rate}</td>
             <td>
-                <button onclick="deleteEmpFromLocal('${emp.account}')"   class="btn btn-danger btnCreate"  >Xóa</button>
-                <button onclick="viewDetail('${emp.account}')"       class="btn btn-info btnCreate" >Xem</button>
+                <button onclick="deleteEmpFromLocal('${emp.account}')"   class="btn btn-danger"  >Xóa</button>
+                <button onclick="viewDetail('${emp.account}')"       class="btn btn-info" >Xem</button>
             </td>
         </tr>`
         content += trELE;
