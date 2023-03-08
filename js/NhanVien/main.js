@@ -122,7 +122,7 @@ function viewDetail(id) {
             getELE("email").value = "";
             getELE("password").value = "";
             getELE("luongCB").value = "";
-            getELE("chucvu").value = "";
+            getELE("chucvu").value = 0;
             getELE("gioLam").value = "";
         }
     }
