@@ -79,7 +79,7 @@ function Validation() {
 
 
     this.checkPass = function(valueInput, spanID, message) {
-        var pattern = /^(.{6,10}|[\W_]|\d|[A-Z])$/
+        var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,10}$/
 
         if (valueInput.match(pattern)) {
             document.getElementById(spanID).style.display = "none";
