@@ -85,7 +85,6 @@ function addEmpFromForm() {
         employee.employRating();
 
         listEmployee.addEmployee(employee);
-        listEmployee.updateEmployee(employee);
         displayTable(listEmployee.empArray);
         setLocalStorage(listEmployee.empArray);
     }
@@ -115,19 +114,55 @@ function viewDetail(id) {
         getELE("luongCB").value = listEmployee.empArray[index].basicSalary;
         getELE("chucvu").value = listEmployee.empArray[index].position;
         getELE("gioLam").value = listEmployee.empArray[index].workingHourOfMonth;
-        getELE("btnDong").onclick = function() {
-            getELE("tknv").value = "";
-            getELE("tknv").disabled = false;
-            getELE("name").value = "";
-            getELE("email").value = "";
-            getELE("password").value = "";
-            getELE("luongCB").value = "";
-            getELE("chucvu").value = 0;
-            getELE("gioLam").value = "";
-        }
+        // getELE("btnDong").onclick = function() {
+        //     getELE("tknv").value = "";
+        //     getELE("tknv").disabled = false;
+        //     getELE("name").value = "";
+        //     getELE("email").value = "";
+        //     getELE("password").value = "";
+        //     getELE("luongCB").value = "";
+        //     getELE("chucvu").value = 0;
+        //     getELE("gioLam").value = "";
+        // }
     }
 }
 
+function update() {
+    var account = getELE("tknv").value;
+    var name = getELE("name").value;
+    var email = getELE("email").value;
+    var pass = getELE("password").value;
+    var dayStartWork = getELE("datepicker").value;
+    var basicSalary = getELE("luongCB").value;
+    var position = getELE("chucvu").value;
+    var workingHourOfMonth = getELE("gioLam").value;
+
+    var isValid = true;
+
+    isValid &= validation.checkEmpty(name, "tbTen", "Tên không để trống!") && validation.checkName(name, "tbTen", "Tên chưa đúng định dạng!");
+
+    isValid &= validation.checkEmpty(email, "tbEmail", "Email không để trống!") && validation.checkEmail(email, "tbEmail", "Email chưa đúng định dạng!");
+
+    isValid &= validation.checkEmpty(pass, "tbMatKhau", "Mật khẩu không để trống!") && validation.checkPass(pass, "tbMatKhau", "Mật khẩu chưa đúng định dạng!");
+
+    isValid &= validation.checkEmpty(dayStartWork, "tbNgay", "Ngày làm không để trống!") && validation.checkDay(dayStartWork, "tbNgay", "Ngày làm chưa đúng định dạng!");
+
+    isValid &= validation.checkEmpty(basicSalary, "tbLuongCB", "Lương cơ bản không để trống!") && validation.checkBasicSalary(basicSalary, "tbLuongCB", "Lương cơ bản chưa hợp lệ!");
+
+    isValid &= validation.checkSelect("chucvu", "tbChucVu", "Chức vụ chưa hợp lệ!");
+
+    isValid &= validation.checkEmpty(workingHourOfMonth, "tbGiolam", "Số giờ làm không để trống!") && validation.checkWorkingHourOfMonth(workingHourOfMonth, "tbGiolam", "Số giờ làm chưa hợp lệ!");
+
+    if (isValid) {
+        var emp = new Employee(account, name, email, pass, dayStartWork, Number(basicSalary), position, Number(workingHourOfMonth));
+        emp.calTotalSalary();
+        emp.employRating();
+
+        listEmployee.updateEmployee(emp);
+        setLocalStorage(listEmployee.empArray);
+        getLocalStorage();
+    }
+}
 getELE("btnCapNhat").onclick = update;
 
 
@@ -136,3 +171,21 @@ getELE("searchRateEmp").onkeyup = function() {
     var result = listEmployee.searchRate(keyword);
     displayTable(result);
 }
+
+
+var clear = function() {
+    if (getELE("tknv").disabled = true) {
+        getELE("tknv").disabled = false;
+        getELE("tknv").value = "";
+    } else {
+        getELE("tknv").value = "";
+    }
+    getELE("name").value = "";
+    getELE("email").value = "";
+    getELE("password").value = "";
+    getELE("luongCB").value = "";
+    getELE("chucvu").value = 0;
+    getELE("gioLam").value = "";
+}
+
+getELE("btnDong").onclick = clear;
