@@ -68,7 +68,7 @@ function addEmpFromForm() {
     isValid &= validation.checkEmpty(pass, "tbMatKhau", "Mật khẩu không để trống!") && validation.checkPass(pass, "tbMatKhau", "Mật khẩu chưa đúng định dạng!")
 
     // check ngày làm
-    isValid &= validation.checkEmpty(dayStartWork, "tbNgay", "Ngày không để trống!");
+    isValid &= validation.checkEmpty(dayStartWork, "tbNgay", "Ngày làm không để trống!") && validation.checkDay(dayStartWork, "tbNgay", "Ngày làm chưa đúng định dạng!");
 
     //check lương cơ bản
     isValid &= validation.checkEmpty(basicSalary, "tbLuongCB", "Lương không để trống!") && validation.checkBasicSalary(basicSalary, "tbLuongCB", "Lương chưa hợp lệ!")
@@ -85,6 +85,7 @@ function addEmpFromForm() {
         employee.employRating();
 
         listEmployee.addEmployee(employee);
+        listEmployee.updateEmployee(employee);
         displayTable(listEmployee.empArray);
         setLocalStorage(listEmployee.empArray);
     }
@@ -114,34 +115,20 @@ function viewDetail(id) {
         getELE("luongCB").value = listEmployee.empArray[index].basicSalary;
         getELE("chucvu").value = listEmployee.empArray[index].position;
         getELE("gioLam").value = listEmployee.empArray[index].workingHourOfMonth;
+        getELE("btnDong").onclick = function() {
+            getELE("tknv").value = "";
+            getELE("tknv").disabled = false;
+            getELE("name").value = "";
+            getELE("email").value = "";
+            getELE("password").value = "";
+            getELE("luongCB").value = "";
+            getELE("chucvu").value = "";
+            getELE("gioLam").value = "";
+        }
     }
 }
 
-
-function update() {
-
-    var account = getELE("tknv").value;
-    var name = getELE("name").value;
-    var email = getELE("email").value;
-    var pass = getELE("password").value;
-    var dayStartWork = getELE("datepicker").value;
-    var basicSalary = getELE("luongCB").value;
-    var position = getELE("chucvu").value;
-    var workingHourOfMonth = getELE("gioLam").value;
-
-    var emp = new Employee(account, name, email, pass, dayStartWork, Number(basicSalary), position, Number(workingHourOfMonth));
-    emp.calTotalSalary();
-    emp.employRating();
-
-    listEmployee.updateEmployee(emp);
-
-    setLocalStorage(listEmployee.empArray);
-    getLocalStorage();
-
-}
-
 getELE("btnCapNhat").onclick = update;
-
 
 
 getELE("searchRateEmp").onkeyup = function() {

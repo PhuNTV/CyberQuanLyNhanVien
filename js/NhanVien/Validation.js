@@ -93,6 +93,21 @@ function Validation() {
 
     }
 
+    this.checkDay = function(valueInput, spanID, message) {
+        var pattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/((19|20)\d{2})$/;
+
+        if (valueInput.match(pattern)) {
+            document.getElementById(spanID).style.display = "none";
+            document.getElementById(spanID).innerHTML = "";
+            return true
+        }
+
+        document.getElementById(spanID).style.display = "block";
+        document.getElementById(spanID).innerHTML = message;
+        return false
+
+    }
+
     this.checkBasicSalary = function(valueInput, spanID, message) {
 
         if (valueInput >= 1000000 && valueInput <= 20000000) {
