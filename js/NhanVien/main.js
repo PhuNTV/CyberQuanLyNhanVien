@@ -114,16 +114,6 @@ function viewDetail(id) {
         getELE("luongCB").value = listEmployee.empArray[index].basicSalary;
         getELE("chucvu").value = listEmployee.empArray[index].position;
         getELE("gioLam").value = listEmployee.empArray[index].workingHourOfMonth;
-        // getELE("btnDong").onclick = function() {
-        //     getELE("tknv").value = "";
-        //     getELE("tknv").disabled = false;
-        //     getELE("name").value = "";
-        //     getELE("email").value = "";
-        //     getELE("password").value = "";
-        //     getELE("luongCB").value = "";
-        //     getELE("chucvu").value = 0;
-        //     getELE("gioLam").value = "";
-        // }
     }
 }
 
